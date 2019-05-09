@@ -7,21 +7,37 @@
 //
 
 #import "FullControlViewController.h"
+#import "FileLabelViewController.h"
 #import "DJIGimbal+CapabilityCheck.h"
 #import "DemoUtility.h"
 
-@interface FullControlViewController () <DJIGimbalDelegate, UITextFieldDelegate>
+@interface FullControlViewController () <DJIGimbalDelegate, UITextFieldDelegate, FileLabelDelegate>
 
 @property (assign, nonatomic) NSNumber *pitchRotation;
 @property (assign, nonatomic) NSNumber *yawRotation;
 
 @property(strong,nonatomic) NSTimer* gimbalSpeedTimer;
 
+@property (strong) NSString *recordFileName;
 @property (strong) NSMutableArray *motionRecord;
 
 @end
 
 @implementation FullControlViewController
+
+-(void) viewDidLoad {
+    [super viewDidLoad];
+    
+    FileLabelViewController *labelVC = [[FileLabelViewController alloc] initWithNibName:@"FileLabelViewController" bundle:nil];
+    [labelVC setModalPresentationStyle:UIModalPresentationOverFullScreen];
+    [labelVC setDelegate:self];
+    
+    [self presentViewController:labelVC animated:YES completion:nil];
+    
+    if (!self.recordFileName) {
+        self.recordFileName = @"";
+    }
+}
 
 -(void) viewWillAppear:(BOOL)animated {
     [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
@@ -38,7 +54,6 @@
         [gimbal setDelegate:self];
     }
     
-    [self.phoneTag setDelegate:self];
 }
 
 -(void) viewWillDisappear:(BOOL)animated {
@@ -59,13 +74,6 @@
         [_motionRecord removeAllObjects];
     }
 }
-
-#pragma mark - UITextFieldDelegate
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [textField resignFirstResponder];
-    return NO;
-}
-
 
 -(void)checkAndStartSpeedTimer {
     if (self.gimbalSpeedTimer == nil || ![self.gimbalSpeedTimer isValid]) {
@@ -100,6 +108,16 @@
 - (IBAction)onAllButtonRelease:(id)sender {
     self.pitchRotation = nil;
     self.yawRotation = nil;
+}
+
+#pragma mark FileLabelDelegate
+- (void)setFileLabel:(NSString *)fileLabel {
+    NSDate *currentTime = [NSDate date];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"y-MM-dd-HH-mm"];
+    NSString *resultString = [dateFormatter stringFromDate: currentTime];
+    
+    self.recordFileName = [NSString stringWithFormat:@"%@-%@", fileLabel, resultString];
 }
 
 #pragma mark - controlSlider methods
@@ -217,7 +235,7 @@
 
 
 -(void)writeToFile:(NSArray*)motionData{
-    NSString *filePath= [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@-motionData.csv", self.phoneTag.text]];
+    NSString *filePath= [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@-gimbal_attitudes.csv", self.recordFileName]];
     
     if (![[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
         [[NSFileManager defaultManager] createFileAtPath:filePath contents:nil attributes:nil];
