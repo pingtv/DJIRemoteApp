@@ -37,7 +37,26 @@
     if (!self.recordFileName) {
         self.recordFileName = @"";
     }
+    
+    [self.controlSlider setThumbImage:[self generateHandleImageWithColor:[UIColor grayColor]] forState:UIControlStateNormal];
+
 }
+
+- (UIImage *)generateHandleImageWithColor:(UIColor *)color
+{
+    CGRect rect = CGRectMake(0.0f, 0.0f, self.controlSlider.bounds.size.height + 50.f, self.controlSlider.bounds.size.height + 50.f);
+    UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0.f);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetFillColorWithColor(context, color.CGColor);
+    CGContextFillRect(context, CGRectInset(rect, 10.f, 10.f));
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
+
 
 -(void) viewWillAppear:(BOOL)animated {
     [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
@@ -122,9 +141,15 @@
 
 #pragma mark - controlSlider methods
 - (IBAction)controlSliderValueChanged:(id)sender {
+    if (ABS(self.controlSlider.value) < 3) {
+        return;
+    }
+    
+    float val = self.controlSlider.value - 3.0;
+    
     [self checkAndStartSpeedTimer];
     self.pitchRotation = nil;
-    self.yawRotation = [NSNumber numberWithInt:(int)self.controlSlider.value];
+    self.yawRotation = [NSNumber numberWithInt:(int)val];
 }
 - (IBAction)controlSliderRelease:(id)sender {
     [self.controlSlider setValue:0 animated:YES];
