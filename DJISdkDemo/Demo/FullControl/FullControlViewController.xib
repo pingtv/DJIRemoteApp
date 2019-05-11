@@ -25,16 +25,16 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ag9-vM-gQb">
-                    <rect key="frame" x="37" y="45" width="302" height="80"/>
+                    <rect key="frame" x="37" y="35" width="302" height="150"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="80" id="8Q0-nv-elY"/>
+                        <constraint firstAttribute="height" constant="150" id="8Q0-nv-elY"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dXF-YK-yia" userLabel="PitchMin">
-                    <rect key="frame" x="69.5" y="311" width="83" height="34"/>
+                    <rect key="frame" x="69.5" y="221" width="83" height="34"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="83" id="fJ8-vo-F9X"/>
                         <constraint firstAttribute="height" constant="34" id="fNZ-wh-CmQ"/>
@@ -50,7 +50,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sTe-u4-MYA" userLabel="PitchMax">
-                    <rect key="frame" x="221.5" y="311" width="83" height="34"/>
+                    <rect key="frame" x="221.5" y="221" width="83" height="34"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="34" id="Iif-Px-AgT"/>
                         <constraint firstAttribute="width" constant="83" id="zRE-dM-Art"/>
@@ -66,7 +66,7 @@
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rotate Gimbal's Pitch" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kcU-fr-KzC">
-                    <rect key="frame" x="105.5" y="285" width="164" height="21"/>
+                    <rect key="frame" x="105.5" y="195" width="164" height="21"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="163.5" id="URB-t9-fA9"/>
                     </constraints>
@@ -75,7 +75,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gdh-oa-fYg" userLabel="YawMax">
-                    <rect key="frame" x="146" y="365" width="83" height="34"/>
+                    <rect key="frame" x="146" y="275" width="83" height="34"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="34" id="Psp-NT-wPx"/>
                         <constraint firstAttribute="width" constant="83" id="yXp-cs-DiV"/>
@@ -94,8 +94,8 @@
                 <constraint firstItem="kcU-fr-KzC" firstAttribute="leading" secondItem="dXF-YK-yia" secondAttribute="trailing" constant="-47" id="32Z-25-6ZQ"/>
                 <constraint firstItem="kcU-fr-KzC" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="4Kt-Kz-Iun"/>
                 <constraint firstItem="gdh-oa-fYg" firstAttribute="top" secondItem="dXF-YK-yia" secondAttribute="bottom" constant="20" id="7l0-7g-Zx1"/>
-                <constraint firstItem="kcU-fr-KzC" firstAttribute="top" secondItem="ag9-vM-gQb" secondAttribute="bottom" constant="160" id="E5k-LH-Rby"/>
-                <constraint firstItem="ag9-vM-gQb" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="25" id="EO5-Eo-tLd"/>
+                <constraint firstItem="kcU-fr-KzC" firstAttribute="top" secondItem="ag9-vM-gQb" secondAttribute="bottom" constant="10" id="E5k-LH-Rby"/>
+                <constraint firstItem="ag9-vM-gQb" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="15" id="EO5-Eo-tLd"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="ag9-vM-gQb" secondAttribute="trailing" constant="36" id="abq-Ug-jUR"/>
                 <constraint firstItem="sTe-u4-MYA" firstAttribute="top" secondItem="kcU-fr-KzC" secondAttribute="bottom" constant="5" id="bVT-hx-TMC"/>
                 <constraint firstItem="sTe-u4-MYA" firstAttribute="leading" secondItem="kcU-fr-KzC" secondAttribute="trailing" constant="-47.5" id="evP-Lg-cDI"/>

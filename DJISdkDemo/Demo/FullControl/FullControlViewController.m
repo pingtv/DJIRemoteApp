@@ -137,11 +137,18 @@
 - (void)controlSliderValueChanged:(id)sender {
     float val = self.controlSlider.outputValue;
     
+    NSLog(@"%f", val);
+    if (ABS(val) > 90) {
+        NSLog(@"lalal");
+    }
+    
     [self checkAndStartSpeedTimer];
     self.pitchRotation = nil;
     self.yawRotation = [NSNumber numberWithInt:(int)val];
 }
 - (void)controlSliderRelease:(id)sender {
+    [self checkAndStartSpeedTimer];
+    self.pitchRotation = nil;
     [self.controlSlider setValue:0 animated:YES];
     [self.controlSlider setOutputValue:0];
     self.yawRotation = @(0);
@@ -151,6 +158,9 @@
 -(void) onUpdateGimbalSpeedTick:(id)timer {
     DJIGimbal* gimbal = [DemoComponentHelper fetchGimbal];
     if (gimbal) {
+        
+//        NSLog(@"%f",[self.yawRotation floatValue]);
+        
         DJIGimbalRotation *rotation = [DJIGimbalRotation gimbalRotationWithPitchValue:self.pitchRotation
                                                                             rollValue:nil
                                                                              yawValue:self.yawRotation
@@ -222,14 +232,33 @@
 //    [gimbalInfoString appendString:@"Is yaw at stop: "];
 //    [gimbalInfoString appendString:state.isYawAtStop?@"YES\n" : @"NO\n"];
     
+    NSString *gimbalInfoString = @"";
+    switch (state.mode) {
+        case DJIGimbalModeFPV:
+            gimbalInfoString = @"FPV\n";
+            break;
+        case DJIGimbalModeFree:
+            gimbalInfoString = @"Free\n";
+            break;
+        case DJIGimbalModeYawFollow:
+            gimbalInfoString = @"yaw-follow\n";
+            break;
+            
+        default:
+            break;
+    }
+    
     CFAbsoluteTime timeInSeconds = CFAbsoluteTimeGetCurrent();
     double timestamp = timeInSeconds + NSTimeIntervalSince1970;
     
-    NSLog(@"%f", timestamp);
-    
-    self.gimbalInfoLabel.text = [NSString stringWithFormat:@"pitch %f\n roll %f\n yaw %f", state.attitudeInDegrees.pitch,
+    self.gimbalInfoLabel.text = [NSString stringWithFormat:@" %@ pitch %f\n roll %f\n yaw %f\n slider value: %f",
+                                 gimbalInfoString,
+                                 state.attitudeInDegrees.pitch,
                                  state.attitudeInDegrees.roll,
-                                 state.attitudeInDegrees.yaw];
+                                 state.attitudeInDegrees.yaw,
+                                 self.controlSlider.outputValue];
+    
+
     
     if (!_motionRecord) {
         _motionRecord = [[NSMutableArray alloc] init];
