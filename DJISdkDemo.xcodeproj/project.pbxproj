@@ -14,6 +14,7 @@
 		10A34C1C2283E25900D2B975 /* FileLabelViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10A34C1A2283E25900D2B975 /* FileLabelViewController.xib */; };
 		17DB9378E0A50F3F579257CD /* libPods-DJISdkDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F1E0E5C197998E87B3E6956A /* libPods-DJISdkDemo.a */; };
 		220836071E83E023003B2365 /* VideoPreviewerSDKAdapter+Lightbridge2.m in Sources */ = {isa = PBXBuildFile; fileRef = 220836061E83E023003B2365 /* VideoPreviewerSDKAdapter+Lightbridge2.m */; };
+		397481FC22869A2800443DBB /* TapAnywhereSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 397481FB22869A2800443DBB /* TapAnywhereSlider.m */; };
 		3B16A8EC19D12167008C1818 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B16A8EB19D12167008C1818 /* Foundation.framework */; };
 		3B16A8EE19D12167008C1818 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B16A8ED19D12167008C1818 /* CoreGraphics.framework */; };
 		3B16A8F019D12167008C1818 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B16A8EF19D12167008C1818 /* UIKit.framework */; };
@@ -167,6 +168,8 @@
 		10A34C1A2283E25900D2B975 /* FileLabelViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FileLabelViewController.xib; sourceTree = "<group>"; };
 		220836051E83E023003B2365 /* VideoPreviewerSDKAdapter+Lightbridge2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "VideoPreviewerSDKAdapter+Lightbridge2.h"; sourceTree = "<group>"; };
 		220836061E83E023003B2365 /* VideoPreviewerSDKAdapter+Lightbridge2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "VideoPreviewerSDKAdapter+Lightbridge2.m"; sourceTree = "<group>"; };
+		397481FA22869A2800443DBB /* TapAnywhereSlider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TapAnywhereSlider.h; sourceTree = "<group>"; };
+		397481FB22869A2800443DBB /* TapAnywhereSlider.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TapAnywhereSlider.m; sourceTree = "<group>"; };
 		3B16A8E819D12167008C1818 /* DJISdkDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DJISdkDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B16A8EB19D12167008C1818 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3B16A8ED19D12167008C1818 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -405,6 +408,8 @@
 				10471ED721F1504400E901C3 /* FullControlViewController.h */,
 				10471ED821F1504400E901C3 /* FullControlViewController.m */,
 				10471ED921F1504400E901C3 /* FullControlViewController.xib */,
+				397481FA22869A2800443DBB /* TapAnywhereSlider.h */,
+				397481FB22869A2800443DBB /* TapAnywhereSlider.m */,
 			);
 			path = FullControl;
 			sourceTree = "<group>";
@@ -1349,6 +1354,7 @@
 				B80CF5821CC5E71E004358FC /* DJIGimbal+CapabilityCheck.m in Sources */,
 				B8AF30571E8A82D40087AFAF /* CameraFetchMediaViewController.m in Sources */,
 				B821D40B1C3169920014ADBD /* GimbalPushInfoViewController.m in Sources */,
+				397481FC22869A2800443DBB /* TapAnywhereSlider.m in Sources */,
 				B821D3FA1C31643D0014ADBD /* MBProgressHUD.m in Sources */,
 				F47C29BE1BDA2304001E6A75 /* ComponentSelectionViewController.m in Sources */,
 				B821D3F61C31643D0014ADBD /* DemoPushInfoViewController.m in Sources */,
