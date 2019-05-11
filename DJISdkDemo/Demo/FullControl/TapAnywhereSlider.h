@@ -12,4 +12,7 @@
 
 -(instancetype)init;
 
+
+@property (assign) float outputValue;
+
 @end

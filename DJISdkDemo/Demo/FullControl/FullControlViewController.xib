@@ -34,7 +34,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dXF-YK-yia" userLabel="PitchMin">
-                    <rect key="frame" x="70" y="311" width="83" height="34"/>
+                    <rect key="frame" x="69.5" y="311" width="83" height="34"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="83" id="fJ8-vo-F9X"/>
                         <constraint firstAttribute="height" constant="34" id="fNZ-wh-CmQ"/>
@@ -50,7 +50,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sTe-u4-MYA" userLabel="PitchMax">
-                    <rect key="frame" x="222" y="311" width="83" height="34"/>
+                    <rect key="frame" x="221.5" y="311" width="83" height="34"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="34" id="Iif-Px-AgT"/>
                         <constraint firstAttribute="width" constant="83" id="zRE-dM-Art"/>
@@ -66,7 +66,7 @@
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rotate Gimbal's Pitch" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kcU-fr-KzC">
-                    <rect key="frame" x="106" y="285" width="163.5" height="21"/>
+                    <rect key="frame" x="105.5" y="285" width="164" height="21"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="163.5" id="URB-t9-fA9"/>
                     </constraints>

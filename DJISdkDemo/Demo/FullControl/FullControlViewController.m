@@ -38,11 +38,9 @@
         self.recordFileName = @"";
     }
     
-//    [self.controlSlider setThumbImage:[self generateHandleImageWithColor:[UIColor grayColor]] forState:UIControlStateNormal];
-    
     self.controlSlider = [[TapAnywhereSlider alloc] init];
     [self.view addSubview:self.controlSlider];
-    [self.controlSlider setFrame:CGRectMake(40, self.view.bounds.size.height-200.0, self.view.bounds.size.width - 80, 200)];
+    [self.controlSlider setFrame:CGRectMake(15, self.view.bounds.size.height-270.0, self.view.bounds.size.width - 30, 250)];
     [self.controlSlider setBackgroundColor:[UIColor lightGrayColor]];
     [self.controlSlider setMaximumValue:80];
     [self.controlSlider setMinimumValue:-80];
@@ -53,22 +51,6 @@
     [self.controlSlider addTarget:self action:@selector(controlSliderRelease:) forControlEvents:UIControlEventTouchUpOutside];
 
 }
-
-//- (UIImage *)generateHandleImageWithColor:(UIColor *)color
-//{
-//    CGRect rect = CGRectMake(0.0f, 0.0f, self.controlSlider.bounds.size.height + 50.f, self.controlSlider.bounds.size.height + 50.f);
-//    UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0.f);
-//    CGContextRef context = UIGraphicsGetCurrentContext();
-//
-//    CGContextSetFillColorWithColor(context, color.CGColor);
-//    CGContextFillRect(context, CGRectInset(rect, 10.f, 10.f));
-//
-//    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-//    UIGraphicsEndImageContext();
-//
-//    return image;
-//}
-
 
 -(void) viewWillAppear:(BOOL)animated {
     [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
@@ -153,11 +135,7 @@
 
 #pragma mark - controlSlider methods
 - (void)controlSliderValueChanged:(id)sender {
-//    if (ABS(self.controlSlider.value) < 3) {
-//        return;
-//    }
-//
-    float val = self.controlSlider.value;// - 3.0;
+    float val = self.controlSlider.outputValue;
     
     [self checkAndStartSpeedTimer];
     self.pitchRotation = nil;
@@ -165,6 +143,7 @@
 }
 - (void)controlSliderRelease:(id)sender {
     [self.controlSlider setValue:0 animated:YES];
+    [self.controlSlider setOutputValue:0];
     self.yawRotation = @(0);
 }
 

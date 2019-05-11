@@ -8,6 +8,13 @@
 
 #import "TapAnywhereSlider.h"
 
+@interface TapAnywhereSlider ()
+
+// sliderTouchBeganInputValue is what the UISlider registers as touchdown value. We will output all value changes relative to this. As in, this will be the new halfway point. We will linearly adjust slider maximum and minimum to sliderTouchBeganInputValue's left and right. If sliderTouchBeganInputValue is left of center, the negative values will be closer together and positive values will be further apart.
+@property (assign) float sliderTouchBeganInputValue;
+
+@end
+
 @implementation TapAnywhereSlider
 
 -(instancetype)init {
@@ -41,13 +48,21 @@
         value = self.minimumValue + delta;
     }
     
-    if(gesture.state == UIGestureRecognizerStateBegan){
-        [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-            [self setValue:value animated:YES];
-            [super sendActionsForControlEvents:UIControlEventValueChanged];
-        } completion:nil];
+//    if(gesture.state == UIGestureRecognizerStateBegan){
+//        [UIView animateWithDuration:0.35 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+//            [self setValue:value animated:YES];
+//            [super sendActionsForControlEvents:UIControlEventValueChanged];
+//        } completion:nil];
+//    }
+//    else [self setValue:value];
+
+    if(gesture.state == UIGestureRecognizerStateBegan) {
+        [self setValue:value];
+        self.sliderTouchBeganInputValue = value;
     }
     else [self setValue:value];
+    
+    [self calculateOutputValue:value];
     
     if(gesture.state == UIGestureRecognizerStateChanged)
         [super sendActionsForControlEvents:UIControlEventValueChanged];
@@ -56,7 +71,15 @@
         [super sendActionsForControlEvents:UIControlEventTouchUpInside];
 }
 
-
+- (void)calculateOutputValue:(float)newInputValue {
+    float relevantValue = (newInputValue < self.sliderTouchBeganInputValue)? self.minimumValue:self.maximumValue;
+    
+    float adjustedRange = ABS(relevantValue - self.sliderTouchBeganInputValue);
+    float originalRange = (self.maximumValue - self.minimumValue)/2.0;
+    float ratio = originalRange/adjustedRange;
+    float newDistance = (newInputValue - self.sliderTouchBeganInputValue);
+    self.outputValue = newDistance * ratio;
+}
 
 /*
 // Only override drawRect: if you perform custom drawing.
