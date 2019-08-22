@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface FullControlViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UILabel *gimbalInfoLabel;
+@property (weak, nonatomic) IBOutlet UILabel *joystickMessageLabel;
+@property (weak, nonatomic) IBOutlet UISwitch *joystickToggle;
 
 @property (weak, nonatomic) IBOutlet UIButton *upButton;
 @property (weak, nonatomic) IBOutlet UIButton *downButton;

@@ -10,8 +10,10 @@
 		0282DA762129103100D8F1E0 /* DJIDecodeImageCalibrateControlLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = 0282DA752129103100D8F1E0 /* DJIDecodeImageCalibrateControlLogic.m */; };
 		10471EDB21F1504400E901C3 /* FullControlViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10471ED921F1504400E901C3 /* FullControlViewController.xib */; };
 		10471EDC21F1520A00E901C3 /* FullControlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10471ED821F1504400E901C3 /* FullControlViewController.m */; };
+		108F7462230E17DF000E545F /* ExternalJoystickController.m in Sources */ = {isa = PBXBuildFile; fileRef = 108F7461230E17DF000E545F /* ExternalJoystickController.m */; };
 		10A34C1B2283E25900D2B975 /* FileLabelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10A34C182283E25800D2B975 /* FileLabelViewController.m */; };
 		10A34C1C2283E25900D2B975 /* FileLabelViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10A34C1A2283E25900D2B975 /* FileLabelViewController.xib */; };
+		10A9D2EA22A60B46000CA09F /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10A9D2E922A60B46000CA09F /* CoreImage.framework */; };
 		17DB9378E0A50F3F579257CD /* libPods-DJISdkDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F1E0E5C197998E87B3E6956A /* libPods-DJISdkDemo.a */; };
 		220836071E83E023003B2365 /* VideoPreviewerSDKAdapter+Lightbridge2.m in Sources */ = {isa = PBXBuildFile; fileRef = 220836061E83E023003B2365 /* VideoPreviewerSDKAdapter+Lightbridge2.m */; };
 		3B16A8EC19D12167008C1818 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B16A8EB19D12167008C1818 /* Foundation.framework */; };
@@ -162,9 +164,12 @@
 		10471ED721F1504400E901C3 /* FullControlViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FullControlViewController.h; sourceTree = "<group>"; };
 		10471ED821F1504400E901C3 /* FullControlViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FullControlViewController.m; sourceTree = "<group>"; };
 		10471ED921F1504400E901C3 /* FullControlViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FullControlViewController.xib; sourceTree = "<group>"; };
+		108F7460230E17DF000E545F /* ExternalJoystickController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExternalJoystickController.h; sourceTree = "<group>"; };
+		108F7461230E17DF000E545F /* ExternalJoystickController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExternalJoystickController.m; sourceTree = "<group>"; };
 		10A34C182283E25800D2B975 /* FileLabelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileLabelViewController.m; sourceTree = "<group>"; };
 		10A34C192283E25800D2B975 /* FileLabelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileLabelViewController.h; sourceTree = "<group>"; };
 		10A34C1A2283E25900D2B975 /* FileLabelViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FileLabelViewController.xib; sourceTree = "<group>"; };
+		10A9D2E922A60B46000CA09F /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		220836051E83E023003B2365 /* VideoPreviewerSDKAdapter+Lightbridge2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "VideoPreviewerSDKAdapter+Lightbridge2.h"; sourceTree = "<group>"; };
 		220836061E83E023003B2365 /* VideoPreviewerSDKAdapter+Lightbridge2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "VideoPreviewerSDKAdapter+Lightbridge2.m"; sourceTree = "<group>"; };
 		3B16A8E819D12167008C1818 /* DJISdkDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DJISdkDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -382,6 +387,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				10A9D2EA22A60B46000CA09F /* CoreImage.framework in Frameworks */,
 				F46E0D4F1BD87C1600627E7D /* CoreMedia.framework in Frameworks */,
 				DEE81F611B9E7EAB006B8ED1 /* VideoToolbox.framework in Frameworks */,
 				3B628ABE1AEE0BC60079AF13 /* MapKit.framework in Frameworks */,
@@ -405,6 +411,8 @@
 				10471ED721F1504400E901C3 /* FullControlViewController.h */,
 				10471ED821F1504400E901C3 /* FullControlViewController.m */,
 				10471ED921F1504400E901C3 /* FullControlViewController.xib */,
+				108F7460230E17DF000E545F /* ExternalJoystickController.h */,
+				108F7461230E17DF000E545F /* ExternalJoystickController.m */,
 			);
 			path = FullControl;
 			sourceTree = "<group>";
@@ -440,6 +448,7 @@
 		3B16A8EA19D12167008C1818 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				10A9D2E922A60B46000CA09F /* CoreImage.framework */,
 				F46E0D4E1BD87C1600627E7D /* CoreMedia.framework */,
 				DEE81F601B9E7EAB006B8ED1 /* VideoToolbox.framework */,
 				3B628ABD1AEE0BC60079AF13 /* MapKit.framework */,
@@ -1236,7 +1245,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-DJISdkDemo/Pods-DJISdkDemo-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-DJISdkDemo/Pods-DJISdkDemo-frameworks.sh",
 				"${PODS_ROOT}/DJI-SDK-iOS/iOS_Mobile_SDK/DJISDK.framework",
 				"${PODS_ROOT}/DJIWidget/FFmpeg/FFmpeg.framework",
 			);
@@ -1247,7 +1256,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DJISdkDemo/Pods-DJISdkDemo-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DJISdkDemo/Pods-DJISdkDemo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		2461DF5504E192B8EA4711D8 /* [CP] Check Pods Manifest.lock */ = {
@@ -1291,6 +1300,7 @@
 			files = (
 				10471EDC21F1520A00E901C3 /* FullControlViewController.m in Sources */,
 				B8AF305B1E8A82D40087AFAF /* CameraPlaybackCommandViewController.m in Sources */,
+				108F7462230E17DF000E545F /* ExternalJoystickController.m in Sources */,
 				B8E2A63F1C3EB3CF0027D8C3 /* RebootWiFiViewController.m in Sources */,
 				10A34C1B2283E25900D2B975 /* FileLabelViewController.m in Sources */,
 				9CC4CB85212D3B7F00B267A1 /* PayloadViewController.m in Sources */,

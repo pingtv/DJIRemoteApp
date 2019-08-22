@@ -8,10 +8,11 @@
 
 #import "FullControlViewController.h"
 #import "FileLabelViewController.h"
+#import "ExternalJoystickController.h"
 #import "DJIGimbal+CapabilityCheck.h"
 #import "DemoUtility.h"
 
-@interface FullControlViewController () <DJIGimbalDelegate, UITextFieldDelegate, FileLabelDelegate>
+@interface FullControlViewController () <DJIGimbalDelegate, UITextFieldDelegate, FileLabelDelegate, ExternalJoystickDelegate>
 
 @property (assign, nonatomic) NSNumber *pitchRotation;
 @property (assign, nonatomic) NSNumber *yawRotation;
@@ -21,9 +22,14 @@
 @property (strong) NSString *recordFileName;
 @property (strong) NSMutableArray *motionRecord;
 
+@property (strong) ExternalJoystickController *externalJoystickController;
+
+
 @end
 
-@implementation FullControlViewController
+@implementation FullControlViewController {
+    
+}
 
 -(void) viewDidLoad {
     [super viewDidLoad];
@@ -37,6 +43,8 @@
     if (!self.recordFileName) {
         self.recordFileName = @"";
     }
+    
+    [self.joystickToggle setOn:NO];
 }
 
 -(void) viewWillAppear:(BOOL)animated {
@@ -74,6 +82,14 @@
         [_motionRecord removeAllObjects];
     }
 }
+
+- (IBAction)joystickToggle:(id)sender {
+    if (!self.externalJoystickController) {
+        self.externalJoystickController = [[ExternalJoystickController alloc] init];
+        self.externalJoystickController.delegate = self;
+    }
+}
+
 
 -(void)checkAndStartSpeedTimer {
     if (self.gimbalSpeedTimer == nil || ![self.gimbalSpeedTimer isValid]) {
@@ -174,6 +190,52 @@
 }
 
 
+#pragma mark - ExternalJoystickDelegate
+-(void)controllerConnected {
+    
+}
+
+- (void)controllerDisconnected {
+    
+}
+
+-(void)joystickMessage:(NSString *)message {
+    [self.joystickMessageLabel setText:message];
+}
+
+- (void)stickWithHorizontalValue:(float)value {
+    
+}
+
+- (void)dPadUp {
+    [self checkAndStartSpeedTimer];
+    self.pitchRotation = @(3);
+    self.yawRotation = nil;
+}
+
+-(void)dPadDown {
+    [self checkAndStartSpeedTimer];
+    self.pitchRotation = @(-3);
+    self.yawRotation = nil;
+}
+
+-(void)dPadRight {
+    [self checkAndStartSpeedTimer];
+    self.yawRotation = @(5);
+    self.pitchRotation = nil;
+}
+
+-(void)dPadLeft {
+    [self checkAndStartSpeedTimer];
+    self.yawRotation = @(-5);
+    self.pitchRotation = nil;
+}
+
+-(void)dPadReleased {
+    [self checkAndStartSpeedTimer];
+    self.yawRotation = @(0);
+    self.pitchRotation = nil;
+}
 
 #pragma mark - DJIGimbalDelegate
 // Override method in DJIGimbalDelegate to receive the pushed data

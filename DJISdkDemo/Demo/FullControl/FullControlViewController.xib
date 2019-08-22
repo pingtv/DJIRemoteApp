@@ -15,6 +15,8 @@
                 <outlet property="controlSlider" destination="fpv-T5-LqO" id="HQ2-sX-e0C"/>
                 <outlet property="downButton" destination="sTe-u4-MYA" id="GfN-2C-L3U"/>
                 <outlet property="gimbalInfoLabel" destination="ag9-vM-gQb" id="1hU-dw-f65"/>
+                <outlet property="joystickMessageLabel" destination="Mp2-Ou-Vny" id="syf-10-sxf"/>
+                <outlet property="joystickToggle" destination="5Gy-m4-z3p" id="34Y-Ru-F7o"/>
                 <outlet property="resetButton" destination="gdh-oa-fYg" id="o0p-CI-xy7"/>
                 <outlet property="upButton" destination="dXF-YK-yia" id="Phb-f4-2Gi"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -29,6 +31,15 @@
                     <rect key="frame" x="37" y="61" width="302" height="80"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="80" id="8Q0-nv-elY"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mp2-Ou-Vny">
+                    <rect key="frame" x="37" y="163" width="302" height="80"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="80" id="3q1-1b-r8g"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
@@ -100,6 +111,13 @@
                         <action selector="controlSliderValueChanged:" destination="-1" eventType="valueChanged" id="egh-d1-xBR"/>
                     </connections>
                 </slider>
+                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Gy-m4-z3p">
+                    <rect key="frame" x="292" y="110" width="49" height="31"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <connections>
+                        <action selector="joystickToggle:" destination="-1" eventType="valueChanged" id="ITq-DY-aPr"/>
+                    </connections>
+                </switch>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -108,12 +126,15 @@
                 <constraint firstItem="gdh-oa-fYg" firstAttribute="top" secondItem="dXF-YK-yia" secondAttribute="bottom" constant="61" id="7l0-7g-Zx1"/>
                 <constraint firstItem="kcU-fr-KzC" firstAttribute="top" secondItem="ag9-vM-gQb" secondAttribute="bottom" constant="160" id="E5k-LH-Rby"/>
                 <constraint firstItem="ag9-vM-gQb" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="41" id="EO5-Eo-tLd"/>
+                <constraint firstItem="Mp2-Ou-Vny" firstAttribute="trailing" secondItem="ag9-vM-gQb" secondAttribute="trailing" id="Srz-1v-jFi"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="fpv-T5-LqO" secondAttribute="bottom" constant="100" id="Uds-GY-pNS"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="ag9-vM-gQb" secondAttribute="trailing" constant="36" id="abq-Ug-jUR"/>
                 <constraint firstItem="sTe-u4-MYA" firstAttribute="top" secondItem="kcU-fr-KzC" secondAttribute="bottom" constant="5" id="bVT-hx-TMC"/>
+                <constraint firstItem="Mp2-Ou-Vny" firstAttribute="leading" secondItem="ag9-vM-gQb" secondAttribute="leading" id="c3d-Ai-ysi"/>
                 <constraint firstItem="fpv-T5-LqO" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="eiG-v2-qYu"/>
                 <constraint firstItem="sTe-u4-MYA" firstAttribute="leading" secondItem="kcU-fr-KzC" secondAttribute="trailing" constant="-47.5" id="evP-Lg-cDI"/>
                 <constraint firstItem="ag9-vM-gQb" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="37" id="hkD-pa-rjh"/>
+                <constraint firstItem="Mp2-Ou-Vny" firstAttribute="top" secondItem="ag9-vM-gQb" secondAttribute="bottom" constant="22" id="m1r-gF-X71"/>
                 <constraint firstItem="dXF-YK-yia" firstAttribute="top" secondItem="kcU-fr-KzC" secondAttribute="bottom" constant="5" id="nCL-cH-BOW"/>
                 <constraint firstItem="gdh-oa-fYg" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="xNk-bQ-A7g"/>
             </constraints>
