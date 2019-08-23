@@ -15,7 +15,7 @@
 
 #define MAX_PAN_SPEED 80
 #define DEADZONE 0.1
-#define DAMPENING_FACTOR 0.95
+#define DAMPENING_FACTOR 0.8
 
 @interface FullControlViewController () <DJIGimbalDelegate, UITextFieldDelegate, FileLabelDelegate, ExternalJoystickDelegate>
 
@@ -232,7 +232,7 @@
     
     [self checkAndStartSpeedTimer];
     
-    self.yawRotation = [NSNumber numberWithInteger:(dir * (NSInteger)floorf(0.7 * fabsf([self.yawRotation floatValue])))];
+    self.yawRotation = [NSNumber numberWithInteger:(dir * (NSInteger)floorf(DAMPENING_FACTOR * fabsf([self.yawRotation floatValue])))];
     if ([self.yawRotation intValue] != 0) {
         decelerating = YES;
     } else {
