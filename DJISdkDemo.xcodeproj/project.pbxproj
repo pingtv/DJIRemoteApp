@@ -16,6 +16,7 @@
 		10A9D2EA22A60B46000CA09F /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10A9D2E922A60B46000CA09F /* CoreImage.framework */; };
 		17DB9378E0A50F3F579257CD /* libPods-DJISdkDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F1E0E5C197998E87B3E6956A /* libPods-DJISdkDemo.a */; };
 		220836071E83E023003B2365 /* VideoPreviewerSDKAdapter+Lightbridge2.m in Sources */ = {isa = PBXBuildFile; fileRef = 220836061E83E023003B2365 /* VideoPreviewerSDKAdapter+Lightbridge2.m */; };
+		397482402286B42900443DBB /* TapAnywhereSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 3974823E2286B42700443DBB /* TapAnywhereSlider.m */; };
 		3B16A8EC19D12167008C1818 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B16A8EB19D12167008C1818 /* Foundation.framework */; };
 		3B16A8EE19D12167008C1818 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B16A8ED19D12167008C1818 /* CoreGraphics.framework */; };
 		3B16A8F019D12167008C1818 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B16A8EF19D12167008C1818 /* UIKit.framework */; };
@@ -172,6 +173,8 @@
 		10A9D2E922A60B46000CA09F /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		220836051E83E023003B2365 /* VideoPreviewerSDKAdapter+Lightbridge2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "VideoPreviewerSDKAdapter+Lightbridge2.h"; sourceTree = "<group>"; };
 		220836061E83E023003B2365 /* VideoPreviewerSDKAdapter+Lightbridge2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "VideoPreviewerSDKAdapter+Lightbridge2.m"; sourceTree = "<group>"; };
+		3974823E2286B42700443DBB /* TapAnywhereSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TapAnywhereSlider.m; sourceTree = "<group>"; };
+		3974823F2286B42900443DBB /* TapAnywhereSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapAnywhereSlider.h; sourceTree = "<group>"; };
 		3B16A8E819D12167008C1818 /* DJISdkDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DJISdkDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B16A8EB19D12167008C1818 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3B16A8ED19D12167008C1818 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -413,6 +416,8 @@
 				10471ED921F1504400E901C3 /* FullControlViewController.xib */,
 				108F7460230E17DF000E545F /* ExternalJoystickController.h */,
 				108F7461230E17DF000E545F /* ExternalJoystickController.m */,
+				3974823F2286B42900443DBB /* TapAnywhereSlider.h */,
+				3974823E2286B42700443DBB /* TapAnywhereSlider.m */,
 			);
 			path = FullControl;
 			sourceTree = "<group>";
@@ -1359,6 +1364,7 @@
 				B80CF5821CC5E71E004358FC /* DJIGimbal+CapabilityCheck.m in Sources */,
 				B8AF30571E8A82D40087AFAF /* CameraFetchMediaViewController.m in Sources */,
 				B821D40B1C3169920014ADBD /* GimbalPushInfoViewController.m in Sources */,
+				397482402286B42900443DBB /* TapAnywhereSlider.m in Sources */,
 				B821D3FA1C31643D0014ADBD /* MBProgressHUD.m in Sources */,
 				F47C29BE1BDA2304001E6A75 /* ComponentSelectionViewController.m in Sources */,
 				B821D3F61C31643D0014ADBD /* DemoPushInfoViewController.m in Sources */,

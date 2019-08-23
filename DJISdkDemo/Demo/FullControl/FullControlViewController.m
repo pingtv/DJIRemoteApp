@@ -11,6 +11,9 @@
 #import "ExternalJoystickController.h"
 #import "DJIGimbal+CapabilityCheck.h"
 #import "DemoUtility.h"
+#import "AppDelegate.h"
+
+#define MAX_PAN_SPEED 80
 
 @interface FullControlViewController () <DJIGimbalDelegate, UITextFieldDelegate, FileLabelDelegate, ExternalJoystickDelegate>
 
@@ -44,7 +47,22 @@
         self.recordFileName = @"";
     }
     
-    [self.joystickToggle setOn:NO];
+
+    self.controlSlider = [[TapAnywhereSlider alloc] init];
+    [self.view addSubview:self.controlSlider];
+    [self.controlSlider setFrame:CGRectMake(15, self.view.bounds.size.height-270.0, self.view.bounds.size.width - 30, 250)];
+    [self.controlSlider setBackgroundColor:[UIColor lightGrayColor]];
+    [self.controlSlider setMaximumValue:MAX_PAN_SPEED];
+    [self.controlSlider setMinimumValue:-MAX_PAN_SPEED];
+    [self.controlSlider setValue:0];
+    
+    [self.controlSlider addTarget:self action:@selector(controlSliderValueChanged:) forControlEvents:UIControlEventValueChanged];
+    [self.controlSlider addTarget:self action:@selector(controlSliderRelease:) forControlEvents:UIControlEventTouchUpInside];
+    [self.controlSlider addTarget:self action:@selector(controlSliderRelease:) forControlEvents:UIControlEventTouchUpOutside];
+    
+    AppDelegate *appdelegate = [[UIApplication sharedApplication] delegate];
+    appdelegate.joystickController.delegate = self;
+
 }
 
 -(void) viewWillAppear:(BOOL)animated {
@@ -83,12 +101,6 @@
     }
 }
 
-- (IBAction)joystickToggle:(id)sender {
-    if (!self.externalJoystickController) {
-        self.externalJoystickController = [[ExternalJoystickController alloc] init];
-        self.externalJoystickController.delegate = self;
-    }
-}
 
 
 -(void)checkAndStartSpeedTimer {
@@ -137,13 +149,23 @@
 }
 
 #pragma mark - controlSlider methods
-- (IBAction)controlSliderValueChanged:(id)sender {
+- (void)controlSliderValueChanged:(id)sender {
+    float val = self.controlSlider.outputValue;
+    
+    NSLog(@"%f", val);
+    if (ABS(val) > 90) {
+        NSLog(@"lalal");
+    }
+    
     [self checkAndStartSpeedTimer];
     self.pitchRotation = nil;
-    self.yawRotation = [NSNumber numberWithInt:(int)self.controlSlider.value];
+    self.yawRotation = [NSNumber numberWithInt:(int)val];
 }
-- (IBAction)controlSliderRelease:(id)sender {
+- (void)controlSliderRelease:(id)sender {
+    [self checkAndStartSpeedTimer];
+    self.pitchRotation = nil;
     [self.controlSlider setValue:0 animated:YES];
+    [self.controlSlider setOutputValue:0];
     self.yawRotation = @(0);
 }
 
@@ -151,6 +173,9 @@
 -(void) onUpdateGimbalSpeedTick:(id)timer {
     DJIGimbal* gimbal = [DemoComponentHelper fetchGimbal];
     if (gimbal) {
+        
+//        NSLog(@"%f",[self.yawRotation floatValue]);
+        
         DJIGimbalRotation *rotation = [DJIGimbalRotation gimbalRotationWithPitchValue:self.pitchRotation
                                                                             rollValue:nil
                                                                              yawValue:self.yawRotation
@@ -204,7 +229,12 @@
 }
 
 - (void)stickWithHorizontalValue:(float)value {
+    // value is [-1, 1]. Map that to [-MAX_PAN_SPEED, MAX_PAN_SPEED]
+    float val = value*MAX_PAN_SPEED;
     
+    [self checkAndStartSpeedTimer];
+    self.pitchRotation = nil;
+    self.yawRotation = [NSNumber numberWithInt:(int)val];
 }
 
 - (void)dPadUp {
@@ -221,13 +251,13 @@
 
 -(void)dPadRight {
     [self checkAndStartSpeedTimer];
-    self.yawRotation = @(5);
+    self.yawRotation = @(MAX_PAN_SPEED/2);
     self.pitchRotation = nil;
 }
 
 -(void)dPadLeft {
     [self checkAndStartSpeedTimer];
-    self.yawRotation = @(-5);
+    self.yawRotation = @(-MAX_PAN_SPEED/2);
     self.pitchRotation = nil;
 }
 
@@ -268,14 +298,33 @@
 //    [gimbalInfoString appendString:@"Is yaw at stop: "];
 //    [gimbalInfoString appendString:state.isYawAtStop?@"YES\n" : @"NO\n"];
     
+    NSString *gimbalInfoString = @"";
+    switch (state.mode) {
+        case DJIGimbalModeFPV:
+            gimbalInfoString = @"FPV\n";
+            break;
+        case DJIGimbalModeFree:
+            gimbalInfoString = @"Free\n";
+            break;
+        case DJIGimbalModeYawFollow:
+            gimbalInfoString = @"yaw-follow\n";
+            break;
+            
+        default:
+            break;
+    }
+    
     CFAbsoluteTime timeInSeconds = CFAbsoluteTimeGetCurrent();
     double timestamp = timeInSeconds + NSTimeIntervalSince1970;
     
-    NSLog(@"%f", timestamp);
-    
-    self.gimbalInfoLabel.text = [NSString stringWithFormat:@"pitch %f\n roll %f\n yaw %f", state.attitudeInDegrees.pitch,
+    self.gimbalInfoLabel.text = [NSString stringWithFormat:@" %@ pitch %f\n roll %f\n yaw %f\n slider value: %f",
+                                 gimbalInfoString,
+                                 state.attitudeInDegrees.pitch,
                                  state.attitudeInDegrees.roll,
-                                 state.attitudeInDegrees.yaw];
+                                 state.attitudeInDegrees.yaw,
+                                 self.controlSlider.outputValue];
+    
+
     
     if (!_motionRecord) {
         _motionRecord = [[NSMutableArray alloc] init];

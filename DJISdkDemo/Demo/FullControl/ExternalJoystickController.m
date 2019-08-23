@@ -156,13 +156,13 @@
             if (gamepad.rightThumbstick.up.isPressed) {
                 message = [NSString stringWithFormat:@"Right Stick %f", gamepad.rightThumbstick.yAxis.value];
             }
-            if (gamepad.rightThumbstick.down.isPressed) {
+            else if (gamepad.rightThumbstick.down.isPressed) {
                 message = [NSString stringWithFormat:@"Right Stick %f", gamepad.rightThumbstick.yAxis.value];
             }
-            if (gamepad.rightThumbstick.left.isPressed) {
+            else if (gamepad.rightThumbstick.left.isPressed) {
                 message = [NSString stringWithFormat:@"Right Stick %f", gamepad.rightThumbstick.xAxis.value];
             }
-            if (gamepad.rightThumbstick.right.isPressed) {
+            else if (gamepad.rightThumbstick.right.isPressed) {
                 message = [NSString stringWithFormat:@"Right Stick %f", gamepad.rightThumbstick.xAxis.value];
             }
             else {

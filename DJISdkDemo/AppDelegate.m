@@ -24,6 +24,9 @@
     // Override point for customization after application launch.
     [self customizeAppearance];
     [self.window makeKeyAndVisible];
+    
+    self.joystickController = [[ExternalJoystickController alloc] init];
+    
     return YES;
 }
 
