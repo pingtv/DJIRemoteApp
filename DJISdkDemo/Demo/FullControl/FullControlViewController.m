@@ -14,6 +14,7 @@
 #import "AppDelegate.h"
 
 #define MAX_PAN_SPEED 80
+#define DEADZONE 0.1
 
 @interface FullControlViewController () <DJIGimbalDelegate, UITextFieldDelegate, FileLabelDelegate, ExternalJoystickDelegate>
 
@@ -229,8 +230,16 @@
 }
 
 - (void)stickWithHorizontalValue:(float)value {
+    // give some deadzone and rescale remaining between [-1, 1]
+    float val;
+    if (fabsf(value) < DEADZONE) {
+        val = 0.0;
+    } else {
+        val = (fabsf(value) - DEADZONE) * 1.0/(1-DEADZONE) * ((value > 0)? 1:-1);
+    }
+    
     // value is [-1, 1]. Map that to [-MAX_PAN_SPEED, MAX_PAN_SPEED]
-    float val = value*MAX_PAN_SPEED;
+    val = val*MAX_PAN_SPEED;
     
     [self checkAndStartSpeedTimer];
     self.pitchRotation = nil;
