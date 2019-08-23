@@ -15,6 +15,7 @@
 
 #define MAX_PAN_SPEED 80
 #define DEADZONE 0.1
+#define DAMPENING_FACTOR 0.95
 
 @interface FullControlViewController () <DJIGimbalDelegate, UITextFieldDelegate, FileLabelDelegate, ExternalJoystickDelegate>
 
@@ -32,7 +33,7 @@
 @end
 
 @implementation FullControlViewController {
-    
+    BOOL decelerating;
 }
 
 -(void) viewDidLoad {
@@ -63,6 +64,8 @@
     
     AppDelegate *appdelegate = [[UIApplication sharedApplication] delegate];
     appdelegate.joystickController.delegate = self;
+    
+    decelerating = NO;
 
 }
 
@@ -153,7 +156,6 @@
 - (void)controlSliderValueChanged:(id)sender {
     float val = self.controlSlider.outputValue;
     
-    NSLog(@"%f", val);
     if (ABS(val) > 90) {
         NSLog(@"lalal");
     }
@@ -163,11 +165,16 @@
     self.yawRotation = [NSNumber numberWithInt:(int)val];
 }
 - (void)controlSliderRelease:(id)sender {
-    [self checkAndStartSpeedTimer];
-    self.pitchRotation = nil;
+    
+    [self deceleration];
     [self.controlSlider setValue:0 animated:YES];
     [self.controlSlider setOutputValue:0];
-    self.yawRotation = @(0);
+    
+//    [self checkAndStartSpeedTimer];
+//    self.pitchRotation = nil;
+//    [self.controlSlider setValue:0 animated:YES];
+//    [self.controlSlider setOutputValue:0];
+//    self.yawRotation = @(0);
 }
 
 
@@ -175,7 +182,7 @@
     DJIGimbal* gimbal = [DemoComponentHelper fetchGimbal];
     if (gimbal) {
         
-//        NSLog(@"%f",[self.yawRotation floatValue]);
+        NSLog(@"executed yaw %f",[self.yawRotation floatValue]);
         
         DJIGimbalRotation *rotation = [DJIGimbalRotation gimbalRotationWithPitchValue:self.pitchRotation
                                                                             rollValue:nil
@@ -186,6 +193,9 @@
         [gimbal rotateWithRotation:rotation completion:^(NSError * _Nullable error) {
             if (error) {
                 NSLog(@"ERROR: rotateGimbalInSpeed. %@", error.description);
+            }
+            if (decelerating) {
+                [self deceleration];
             }
         }];
     }
@@ -215,6 +225,21 @@
     }];
 }
 
+-(void)deceleration {
+    int dir = ((self.yawRotation.integerValue > 0)? 1:-1);
+    NSLog(@"decelerate yaw: %@ dir: %d", self.yawRotation, dir);
+    [self.joystickMessageLabel setText:[NSString stringWithFormat:@"%@", self.yawRotation]];
+    
+    [self checkAndStartSpeedTimer];
+    
+    self.yawRotation = [NSNumber numberWithInteger:(dir * (NSInteger)floorf(0.7 * fabsf([self.yawRotation floatValue])))];
+    if ([self.yawRotation intValue] != 0) {
+        decelerating = YES;
+    } else {
+        decelerating = NO;
+    }
+}
+
 
 #pragma mark - ExternalJoystickDelegate
 -(void)controllerConnected {
@@ -241,9 +266,14 @@
     // value is [-1, 1]. Map that to [-MAX_PAN_SPEED, MAX_PAN_SPEED]
     val = val*MAX_PAN_SPEED;
     
-    [self checkAndStartSpeedTimer];
-    self.pitchRotation = nil;
-    self.yawRotation = [NSNumber numberWithInt:(int)val];
+    // try decelerating rather than abrupt stop. Abrupt stop is too much torque and causes high frequency vibrations
+    if (val == 0) {
+        [self deceleration];
+    } else {
+        [self checkAndStartSpeedTimer];
+        self.pitchRotation = nil;
+        self.yawRotation = [NSNumber numberWithInt:(int)val];
+    }
 }
 
 - (void)dPadUp {
