@@ -52,7 +52,7 @@
 
     self.controlSlider = [[TapAnywhereSlider alloc] init];
     [self.view addSubview:self.controlSlider];
-    [self.controlSlider setFrame:CGRectMake(15, self.view.bounds.size.height-270.0, self.view.bounds.size.width - 30, 250)];
+    [self.controlSlider setFrame:CGRectMake(15, CGRectGetMaxY(self.resetButton.frame)+80.0, self.view.bounds.size.width - 30, 250)];
     [self.controlSlider setBackgroundColor:[UIColor lightGrayColor]];
     [self.controlSlider setMaximumValue:MAX_PAN_SPEED];
     [self.controlSlider setMinimumValue:-MAX_PAN_SPEED];
@@ -270,6 +270,7 @@
     if (val == 0) {
         [self deceleration];
     } else {
+        decelerating = NO;
         [self checkAndStartSpeedTimer];
         self.pitchRotation = nil;
         self.yawRotation = [NSNumber numberWithInt:(int)val];
